@@ -1,0 +1,44 @@
+{
+  "release": {
+    "branch": "master",
+    "verifyConditions": [
+    ],
+    "verifyConfig": [
+    ],
+    "prepare": [
+    ],
+    "publish": [
+    ],
+    "fail": [
+    ],
+    "success": [
+    ],
+    "plugins": [
+        "@semantic-release/commit-analyzer@6.3.0",
+        "@semantic-release/release-notes-generator",
+        [
+            "@semantic-release/changelog",
+            {
+                "changelogFile": "src/changelog.md"
+            }
+        ],
+        [
+            "@semantic-release/exec",
+            {
+                "publishCmd": "echo ##vso[build.addbuildtag]release"
+            }
+        ],
+        [
+            "@semantic-release/github",
+            {
+                "assets": [
+                    {
+                        "path": "src/changelog.md",
+                        "label": "Changelog"
+                    }
+                ]
+            }
+        ]
+    ]
+}
+}
